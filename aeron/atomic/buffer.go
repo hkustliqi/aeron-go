@@ -121,12 +121,28 @@ func (buf *Buffer) GetUInt8(offset int32) uint8 {
 	return *(*uint8)(uptr)
 }
 
+func (buf *Buffer) GetInt8(offset int32) int8 {
+	BoundsCheck(offset, 1, buf.length)
+
+	uptr := unsafe.Pointer(uintptr(buf.bufferPtr) + uintptr(offset))
+
+	return *(*int8)(uptr)
+}
+
 func (buf *Buffer) GetUInt16(offset int32) uint16 {
 	BoundsCheck(offset, 2, buf.length)
 
 	uptr := unsafe.Pointer(uintptr(buf.bufferPtr) + uintptr(offset))
 
 	return *(*uint16)(uptr)
+}
+
+func (buf *Buffer) GetInt16(offset int32) int16 {
+	BoundsCheck(offset, 2, buf.length)
+
+	uptr := unsafe.Pointer(uintptr(buf.bufferPtr) + uintptr(offset))
+
+	return *(*int16)(uptr)
 }
 
 func (buf *Buffer) GetInt32(offset int32) int32 {
